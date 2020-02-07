@@ -1,0 +1,105 @@
+cd C:\Users\Administrador\Desktop
+
+Write-Host Estas son las cosas que puedes seleccionar:
+write-host 5º estructura 
+Write-Host 1º.Crear nuevo grupo.
+write-host 2º.Deshabilitar un usuario.
+write-host 3º.Mover a uo de los deshabilitados.
+Write-Host 4º.Borar todas las  UO que esten en el txt.
+
+$leer = read-host "selecciona lo que desea hacer"
+
+
+"---------------------------------------------------------------------------------------------------------------"
+if ($leer = 5º ){}
+ $Useres  = gc. \ uo.txt
+     foreach ( $usuer in $uo) {
+
+        if ( $ ele .split ( " , " ) [ 0 ] -EQ  1 ) {
+             $ ou  =  $ ele .split ( " , " ) [ 1 ]
+             New-ADOrganizationalUnit  - Name $ ou  - ProtectedFromAccidentalDeletion $ false  - Path " DC = ou, DC = local "}
+    }
+
+}
+elseif ($leer = 1º) {
+ function NuevoGrupo
+{
+  $NombreGrupo = $ASIR
+  $NombreOU = $ASIR
+  $dominioLDAP = $ASIR
+  $rutaOU = ("OU="+$NombreOU+","+$dominioLDAP)
+  if (Get-ADGroup -Filter {SamAccountName -eq $NombreGrupo})
+  {
+    write-host ("El grupo de ASIR " + $NombreGrupo + " ya existe.") -ForegroundColor green
+  }
+  else
+  {
+    New-ADGroup -DisplayName $NombreGrupo -Name $NombreGrupo -GroupScope DomainLocal -GroupCategory ADMIN -Path $rutaOU
+  }
+}
+}
+
+
+elseif ($leer = 2º) {
+    Get-ADUser -Filter ‘Name -like "*"’ -SearchBase "OU=Finanzas,OU=UserAccounts,DC=Empresa,DC=COM" | Disable-ADAccount 
+}
+
+
+elseif ( $leer = 3º){
+    New-ADOrganizationalUnit -DisplayName "DESHABILITADOS" -Name "DESHABILITADOS" -path $dominioLDAP
+    
+}
+
+
+
+elseif ($leer = "4º") {
+    
+  get-content .\uo.txt | foreach-object {Get-ADOrganizationalUnit -Filter {Name -eq $_ } | Set-ADOrganizationalUnit -ProtectedFromAccidentalDeletion:$false}
+  get-content .\uo.txt | foreach-object {Get-ADOrganizationalUnit -Filter {Name -eq $_ } | Remove-ADOrganizationalUnit -confirm:$false}
+
+
+}
+
+
+
+
+
+"-------------------------------segunda parte----------------------------"
+
+write-host 
+
+get-disk
+$copia = 1
+while ($copia -eq 1) {
+
+    
+}
+
+
+#punto 1º  instalar sofwatre usuarios
+# usuario y contraseña dominio
+$ UsuarioDominio  =  ' Usuario1 '
+$ PasswordDominio  =  Host de lectura  - Preguntar " Tu contraseña: "  - AsSecureString
+$ CredencialesDominio  =  New-Object System.Management.Automation.PSCredential ( $ UsuarioDominio ,  $ PasswordDominio )
+
+punto 2º
+
+
+# punto 3º limitar el numero de procesos
+$services = Get-Service
+$processes = Get-Process
+$services + $processes | Measure-Object
+$services + $processes | Measure-Object -Property DisplayName
+
+Get-ChildItem | Measure-Object -Property psiscontainer -Maximum -Sum -Minimum -Average
+
+punto 4º
+
+
+
+
+
+ 
+
+  
+
